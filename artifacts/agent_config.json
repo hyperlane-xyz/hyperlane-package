@@ -1,1 +1,32 @@
-{}
+{
+  "chains": {
+    "anvil1": {
+      "name": "anvil1",
+      "domain": 31337,
+      "addresses": {
+        "mailbox": "0x6322F81Ca32AA1296a86410B90AE3989B159b9aB",
+        "interchainGasPaymaster": "0xC24803874143090Dd7f9e8B7d0B1ef5E6F136Ed7",
+        "validatorAnnounce": "0xE9Be1ac94f3fD24909298972e08C0Cd5Accead49"
+      },
+      "protocol": "ethereum",
+      "finalityBlocks": 1,
+      "index": {
+        "from": 23
+      }
+    },
+    "goerli": {
+      "name": "goerli",
+      "domain": 5,
+      "addresses": {
+        "mailbox": "0xCC737a94FecaeC165AbCf12dED095BB13F037685",
+        "interchainGasPaymaster": "0x23178a4D39d962E048BD749a367e231671cceB2f",
+        "validatorAnnounce": "0x3Fc742696D5dc9846e04f7A1823D92cb51695f9a"
+      },
+      "protocol": "ethereum",
+      "finalityBlocks": 2,
+      "index": {
+        "from": 8039005
+      }
+    }
+  }
+}
