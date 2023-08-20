@@ -11,7 +11,6 @@ def run(plan, args):
         src="github.com/kurtosis-tech/hyperlane/artifacts/agent_config.json", 
         name="config_file"
     )
-
     validator.run(plan, config_file, args)
     relayer.run(plan, config_file, args)
 

@@ -26,9 +26,7 @@ def run(plan, config_file, args):
     env_vars[DEFAULT_CHAIN_VARIABLE % chain_name] = url 
 
     env_vars["CONFIG_FILES"] = CONFIG_FILES
-    env_vars["HYP_BASE_DEFAULTSIGNER_ID"] = signer_id
-    env_vars["HYP_BASE_DEFAULTSIGNER_TYPE"] = "aws"
-    env_vars["HYP_BASE_DEFAULTSIGNER_REGION"] = region
+    env_vars["HYP_BASE_DEFAULTSIGNER_KEY"] = signer_id
     env_vars["AWS_ACCESS_KEY_ID"] = aws_secret_key_id
     env_vars["AWS_SECRET_ACCESS_KEY"] = aws_secret_access_key
     env_vars["HYP_BASE_RELAYCHAINS"]=",".join(relay_chains)
