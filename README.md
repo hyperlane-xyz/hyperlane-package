@@ -8,7 +8,7 @@ You'll need the following set of args, which you can write to a JSON file like `
 {
   "origin_chain_url": "https://base-goerli.gateway.tenderly.co",
   "origin_chain_name": "base",
-  "validator_key": "<HYPERLANE_VALIDATOR_KEY",
+  "validator_key": "<HYPERLANE_VALIDATOR_KEY>",
   "aws_access_key_id": "<AWS_ACCESS_KEY_ID>",
   "aws_secret_access_key": "<AWS_SECRET_ACCESS_KEY>",
   "aws_bucket_region": "us-east-1",
