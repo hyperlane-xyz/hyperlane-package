@@ -1,13 +1,17 @@
-validator = import_module("github.com/kurtosis-tech/hyperlane/validator.star")
-relayer = import_module("github.com/kurtosis-tech/hyperlane/relayer.star")
+validator = import_module("github.com/kurtosis-tech/hyperlane-package/validator.star")
+relayer = import_module("github.com/kurtosis-tech/hyperlane-package/relayer.star")
 
-def run(plan, origin_chain, remote_chains, aws_env={}):
+def run(plan,
+    origin_chain,
+    remote_chains,
+    aws_env={}
+):
     aws_env = get_aws_user_info(plan, aws_env)
 
     # ADD DEPLOY STEP HERE
 
     config_file = plan.upload_files(
-        src="github.com/kurtosis-tech/hyperlane/artifacts/agent_config.json", 
+        src="github.com/kurtosis-tech/hyperlane-package/artifacts/agent_config.json", 
         name="config_file"
     )
     validator.run(plan, config_file, origin_chain, remote_chains, aws_env)

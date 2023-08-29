@@ -25,11 +25,11 @@ def run(plan, config_file, origin_chain, remote_chains, aws_env):
     env_vars["AWS_SECRET_ACCESS_KEY"] = aws_env.secret_access_key
 
     validator_service_config = ServiceConfig(
-        image="gbouv/hyperlane-agent:dev", # TODO: update this when hyperlane PR is merged
+        image="gcr.io/abacus-labs-dev/hyperlane-agent:478826b-20230828-150025",
         env_vars=env_vars,
         entrypoint=["/bin/sh", "-c", "./validator"],
         files={
-            "/tmp": config_file
+            "/tmp": config_file,
         }
     )
 
