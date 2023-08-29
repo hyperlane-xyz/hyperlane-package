@@ -11,7 +11,7 @@ def run(plan, config_file, origin_chain, remote_chains, aws_env):
     signer_id = origin_chain["signer_id"]
     
     env_vars[DEFAULT_SIGNER_KEY % chain] = signer_id
-    env_vars[DEFAULT_ORIGIN_CHAIN_URL % chain] = url
+    env_vars[constants.DEFAULT_ORIGIN_CHAIN_URL % chain] = url
     
     env_vars["HYP_BASE_CHECKPOINTSYNCER_TYPE"] = "s3"
     env_vars["HYP_BASE_CHECKPOINTSYNCER_REGION"] = aws_env.bucket_region 

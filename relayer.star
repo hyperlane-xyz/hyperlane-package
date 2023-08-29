@@ -1,7 +1,5 @@
 constants = import_module("github.com/kurtosis-tech/hyperlane-package/constants.star")
 
-DEFAULT_CHAIN_VARIABLE = "HYP_BASE_CHAINS_%s_CONNECTION_URL"
-
 def run(plan, config_file, origin_chain, remote_chains, aws_env):
     env_vars = {}
     relay_chains = []
@@ -12,11 +10,11 @@ def run(plan, config_file, origin_chain, remote_chains, aws_env):
 
     for chain in remote_chains:
         relay_chains.append(chain)
-        env_var_name = constants.DEFAULT_CHAIN_VARIABLE % chain
+        env_var_name = constants.DEFAULT_ORIGIN_CHAIN_URL % chain
         env_vars[env_var_name] = remote_chains[chain]
 
     relay_chains.append(chain_name)
-    env_vars[constants.DEFAULT_CHAIN_VARIABLE % chain_name] = url 
+    env_vars[constants.DEFAULT_ORIGIN_CHAIN_URL % chain_name] = url 
 
     env_vars["HYP_BASE_DEFAULTSIGNER_KEY"] = signer_id
     env_vars["HYP_BASE_RELAYCHAINS"]=",".join(relay_chains)
