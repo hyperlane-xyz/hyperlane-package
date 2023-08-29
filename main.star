@@ -1,22 +1,49 @@
 validator = import_module("github.com/kurtosis-tech/hyperlane-package/validator.star")
 relayer = import_module("github.com/kurtosis-tech/hyperlane-package/relayer.star")
 
-def run(plan,
-    origin_chain,
+def run(
+    plan,
+    origin_chain_name, #type: string
+    origin_chain_url,  #type: string
+    validator_key,     #type: string
     remote_chains,
-    aws_env={}
+    aws_access_key_id="",  #type: string
+    aws_secret_access_key="", #type: string
+    aws_bucket_region="", #type: string
+    aws_bucket_name="", #type: string
+    aws_bucket_folder="" #type: string
 ):
-    aws_env = get_aws_user_info(plan, aws_env)
+    aws_env = {}
+    if len(aws_access_key_id) > 0:
+        aws_env["aws_access_key_id"] = aws_access_key_id
+
+    if len(aws_secret_access_key) > 0:
+        aws_env["aws_secret_access_key"] = aws_secret_access_key
+    
+    if len(aws_bucket_region) > 0:
+        aws_env["aws_bucket_region"] = aws_bucket_region
+    
+    if len(aws_bucket_name) > 0:
+        aws_env["aws_bucket_name"] = aws_bucket_name
+    
+    if len(aws_bucket_folder) > 0:
+        aws_env["aws_bucket_folder"] = aws_bucket_folder
+
+    env_aws = get_aws_user_info(plan, aws_env)
+
+    origin_chain = {
+        "url": origin_chain_url,
+        "chain_name": origin_chain_name,
+        "signer_id": validator_key
+    }
 
     # ADD DEPLOY STEP HERE
-
     config_file = plan.upload_files(
         src="github.com/kurtosis-tech/hyperlane-package/artifacts/agent_config.json", 
         name="config_file"
     )
-    validator.run(plan, config_file, origin_chain, remote_chains, aws_env)
-    relayer.run(plan, config_file, origin_chain, remote_chains, aws_env)
-
+    validator.run(plan, config_file, origin_chain, remote_chains, env_aws)
+    relayer.run(plan, config_file, origin_chain, remote_chains, env_aws)
 
 def get_aws_user_info(plan, aws_env):
     if len(aws_env) > 0:

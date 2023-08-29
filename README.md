@@ -6,20 +6,15 @@ Hyperlane package
 You'll need the following set of args, which you can write to a JSON file like `args.json`
 ```
 {
-  "origin_chain": {
-    "url": "https://base-goerli.gateway.tenderly.co",
-    "chain_name": "base",
-    "signer_id": "ADD_THE_SIGNER_ID_HERE"
-  },
+  "origin_chain_url": "https://base-goerli.gateway.tenderly.co",
+  "origin_chain_name": "base",
+  "validator_key": "<HYPERLANE_VALIDATOR_KEY",
+  "aws_access_key_id": "<AWS_ACCESS_KEY_ID>",
+  "aws_secret_access_key": "<AWS_SECRET_ACCESS_KEY>",
+  "aws_bucket_region": "us-east-1",
+  "aws_bucket_name": "<AWS_BUCKET_NAME>",
   "remote_chains": {
     "goerli":"https://goerli-rollup.arbitrum.io/rpc"
-  },
-  "aws_env": {
-    "aws_access_key_id": "AWS_USER_ACCESS_KEY_ID",
-    "aws_secret_access_key": "AWS_USER_SECRET_ACCESS_KEY",
-    "aws_bucket_region": "us-east-1",
-    "aws_bucket_name": "BUCKET_TO_READ_AND_WRITE_DATA",
-    "aws_bucket_folder": "OPTIONAL_FOLDER_INSIDE_BUCKET_TO_USE"
   }
 }
 ```
