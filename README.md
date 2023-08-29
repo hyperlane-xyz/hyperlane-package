@@ -13,6 +13,7 @@ You'll need the following set of args, which you can write to a JSON file like `
   "aws_secret_access_key": "<AWS_SECRET_ACCESS_KEY>",
   "aws_bucket_region": "us-east-1",
   "aws_bucket_name": "<AWS_BUCKET_NAME>",
+  "aws_bucket_folder":"<OPTIONAL_FOLDER_INSIDE_BUCKET_TO_USE>"
   "remote_chains": {
     "goerli":"https://goerli-rollup.arbitrum.io/rpc"
   }
