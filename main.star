@@ -1,5 +1,6 @@
 validator = import_module("github.com/kurtosis-tech/hyperlane-package/validator.star")
 relayer = import_module("github.com/kurtosis-tech/hyperlane-package/relayer.star")
+utils = import_module("github.com/kurtosis-tech/hyperlane-package/utils.star")
 
 def run(
     plan,
@@ -11,7 +12,8 @@ def run(
     aws_secret_access_key="", #type: string
     aws_bucket_region="", #type: string
     aws_bucket_name="", #type: string
-    aws_bucket_folder="" #type: string
+    aws_bucket_folder="", #type: string
+    agent_config_json="", #type: string
 ):
     aws_env = {}
     if len(aws_access_key_id) > 0:
@@ -38,10 +40,7 @@ def run(
     }
 
     # ADD DEPLOY STEP HERE
-    config_file = plan.upload_files(
-        src="github.com/kurtosis-tech/hyperlane-package/artifacts/agent_config.json", 
-        name="config_file"
-    )
+    config_file = utils.get_agent_config_artifact(plan, agent_config_json) 
     validator.run(plan, config_file, origin_chain, remote_chains, env_aws)
     relayer.run(plan, config_file, origin_chain, remote_chains, env_aws)
 
