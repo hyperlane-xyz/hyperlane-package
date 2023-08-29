@@ -13,14 +13,15 @@ You'll need the following set of args, which you can write to a JSON file like `
   "aws_secret_access_key": "<AWS_SECRET_ACCESS_KEY>",
   "aws_bucket_region": "us-east-1",
   "aws_bucket_name": "<AWS_BUCKET_NAME>",
-  "aws_bucket_folder":"<OPTIONAL_FOLDER_INSIDE_BUCKET_TO_USE>"
+  "aws_bucket_folder":"<OPTIONAL_FOLDER_INSIDE_BUCKET_TO_USE>",
   "remote_chains": {
     "goerli":"https://goerli-rollup.arbitrum.io/rpc"
-  }
+  },
+  "agent_config_json": ""
 }
 ```
 
-The origin chain and remote chains should reference the ones listed in [agent_config.json](./artifacts/agent_config.json). If you want to use custom ones, be sure to add their info into this file also.
+The origin chain and remote chains should reference the ones listed in [agent_config.json](./artifacts/agent_config.json). If you want to use custom ones, be sure to add their info into this file also. Alternativelly, you can place its contents inside `agent_config_json` parameter to your `args.json` with the JSON string containing the chain information.
 
 An AWS user key and S3 bucket is required when running locally so that the validator service can persist data to it. When running the package on Kurtosis Cloud, the `aws_env` part becomes optional because Kurtosis Cloud automatically provides this information to the package via its environment variable.
 
