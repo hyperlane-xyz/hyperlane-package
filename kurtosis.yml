@@ -1,1 +1,3 @@
 name: github.com/kurtosis-tech/hyperlane-package
+description: |
+  Kurtosis package to spin up an Hyperlane validator and relayer
