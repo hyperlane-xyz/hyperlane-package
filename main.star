@@ -29,7 +29,7 @@ def run(
         aws_env["aws_bucket_name"] = aws_bucket_name
     
     if len(aws_bucket_folder) > 0:
-        aws_env["aws_bucket_folder"] = aws_bucket_folder
+        aws_env["aws_bucket_user_folder"] = aws_bucket_folder
 
     env_aws = get_aws_user_info(plan, aws_env)
 
