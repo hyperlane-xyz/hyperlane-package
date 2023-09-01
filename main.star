@@ -8,12 +8,12 @@ def run(
     origin_chain_url,  #type: string
     validator_key,     #type: string
     remote_chains,
+    agent_config_json,
     aws_access_key_id="",  #type: string
     aws_secret_access_key="", #type: string
     aws_bucket_region="", #type: string
     aws_bucket_name="", #type: string
     aws_bucket_folder="", #type: string
-    agent_config_json={},
 ):
     aws_env = {}
     if len(aws_access_key_id) > 0:
