@@ -1,3 +1,32 @@
 name: github.com/kurtosis-tech/hyperlane-package
 description: |
-  Kurtosis package to spin up an Hyperlane validator and relayer
+  Hyperlane
+  ========
+  This Kurtosis package instantiates an environment containing a Hyperlane validator and a Hyperlane relayer. 
+
+  Prerequisites
+  -------------
+  You'll need to have the Hyperlane contracts deployed on both a source blockchain and a deatination blockahin. Instructions for doing so can be found [here](https://docs.hyperlane.xyz/docs/deploy/deploy-hyperlane#2.-deploy-contracts). Deploying the contracts will produce an `agent_config.json` file, which you'll need for configuring this environment.
+
+  Configuration
+  -------------
+  To configure this package, you'll need to provide the following information:
+  - `origin_chain_name`: this corresponds to the value of the `--local` flag you supplied when running the deploy script.
+  - `origin_chain_url`: the RPC URL for origin chain you provided via the `--local` flag in the deploy script. This URL can be found inside the `chain.ts` you provided when running the deploy script (e.g. `https://base-goerli.gateway.tenderly.co`).
+  - `validator_key`: the private key corresponding to the public key that you slotted into the `validators` key of the `multisig_ism.ts` file used when you ran the deploy script. For example, if your `multisig_ism.ts` file had the following, you would provide the private key corresponding to public key `0xd12C119d4548B2E401ec82CeC8c27752d7d31C1C`:
+    ```
+    linea: {
+      type: ModuleType.LEGACY_MULTISIG,
+      threshold: 1,
+      validators: [
+        '0xd12C119d4548B2E401ec82CeC8c27752d7d31C1C',
+      ],
+    },
+    ```
+  - `remote_chains`: a JSON object whose keys correpond to the chains specified in the `--remotes` flag during deploy, and whose values are the RPC URLs where those chains can be reached. For example:
+    ```
+    {
+      "goerli": "https://ethereum-goerli.publicnode.com"
+    }
+    ```
+  - `agent_config_json`: the contents of the `agent_config.json` file produced by running the deploy script.
