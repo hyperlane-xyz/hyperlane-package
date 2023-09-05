@@ -14,7 +14,7 @@ def run(
     aws_bucket_region="", #type: string
     aws_bucket_name="", #type: string
     aws_bucket_folder="", #type: string
-    log_level="info"
+    log_level="info"  #type: string
 ):
     aws_env = {}
     if len(aws_access_key_id) > 0:
