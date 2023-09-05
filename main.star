@@ -14,6 +14,7 @@ def run(
     aws_bucket_region="", #type: string
     aws_bucket_name="", #type: string
     aws_bucket_folder="", #type: string
+    log_level="info"
 ):
     aws_env = {}
     if len(aws_access_key_id) > 0:
@@ -36,13 +37,17 @@ def run(
     origin_chain = {
         "url": origin_chain_url,
         "chain_name": origin_chain_name,
-        "signer_id": validator_key
+        "signer_id": validator_key,
     }
+
+    # ONCE THE BUG IS FIXED, I WILL REMOVE THIS
+    if log_level == "":
+        log_level = "info"
 
     # ADD DEPLOY STEP HERE
     config_file = utils.get_agent_config_artifact(plan, agent_config_json) 
-    validator.run(plan, config_file, origin_chain, remote_chains, env_aws)
-    relayer.run(plan, config_file, origin_chain, remote_chains, env_aws)
+    validator.run(plan, config_file, origin_chain, remote_chains, env_aws, log_level)
+    relayer.run(plan, config_file, origin_chain, remote_chains, env_aws, log_level)
 
 def get_aws_user_info(plan, aws_env):
     if len(aws_env) > 0:
