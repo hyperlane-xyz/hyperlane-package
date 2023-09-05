@@ -3,7 +3,7 @@ constants = import_module("github.com/kurtosis-tech/hyperlane-package/constants.
 DEFAULT_SIGNER_KEY = "HYP_BASE_CHAINS_%s_SIGNER_KEY"
 ORIGIN_CHAIN = "origin_chain"
 
-def run(plan, config_file, origin_chain, remote_chains, aws_env):
+def run(plan, config_file, origin_chain, remote_chains, aws_env, log_level):
     env_vars = {}
 
     url = origin_chain["url"]
@@ -24,6 +24,7 @@ def run(plan, config_file, origin_chain, remote_chains, aws_env):
     env_vars["CONFIG_FILES"] = "{}{}".format(constants.CONFIG_FILE_FOLDER, constants.CONFIG_FILE_NAME)
     env_vars["AWS_ACCESS_KEY_ID"] = aws_env.access_key_id 
     env_vars["AWS_SECRET_ACCESS_KEY"] = aws_env.secret_access_key
+    env_vars["HYP_BASE_TRACING_LEVEL"] = log_level
 
     validator_service_config = ServiceConfig(
         image=constants.HYPERLANE_AGENT_IMAGE,
