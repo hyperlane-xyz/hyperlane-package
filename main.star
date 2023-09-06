@@ -11,7 +11,7 @@ def run(
     agent_config_json,
     custom_validator_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513", #type: string
     custom_relayer_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513", #type: string
-    log_level="info"  #type: string 
+    log_level="info", #type: string 
     aws_access_key_id="",  #type: string
     aws_secret_access_key="", #type: string
     aws_bucket_region="", #type: string
