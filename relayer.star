@@ -1,6 +1,6 @@
 constants = import_module("github.com/kurtosis-tech/hyperlane-package/constants.star")
 
-def run(plan, config_file, origin_chain, remote_chains, aws_env, log_level):
+def run(plan, config_file, origin_chain, remote_chains, aws_env, relayer_image, log_level):
     env_vars = {}
     relay_chains = []
 
@@ -25,7 +25,7 @@ def run(plan, config_file, origin_chain, remote_chains, aws_env, log_level):
     env_vars["HYP_BASE_TRACING_LEVEL"] = log_level
     
     relay_service_config = ServiceConfig(
-        image=constants.HYPERLANE_AGENT_IMAGE,
+        image=relayer_image,
         env_vars=env_vars,
         entrypoint=["/bin/sh", "-c", "./relayer"],
         files={

@@ -9,12 +9,14 @@ def run(
     validator_key,     #type: string
     remote_chains,
     agent_config_json,
+    custom_validator_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513", #type: string
+    custom_relayer_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513", #type: string
+    log_level="info"  #type: string 
     aws_access_key_id="",  #type: string
     aws_secret_access_key="", #type: string
     aws_bucket_region="", #type: string
     aws_bucket_name="", #type: string
     aws_bucket_folder="", #type: string
-    log_level="info"  #type: string
 ):
     aws_env = {}
     if len(aws_access_key_id) > 0:
@@ -46,8 +48,8 @@ def run(
 
     # ADD DEPLOY STEP HERE
     config_file = utils.get_agent_config_artifact(plan, agent_config_json) 
-    validator.run(plan, config_file, origin_chain, remote_chains, env_aws, log_level)
-    relayer.run(plan, config_file, origin_chain, remote_chains, env_aws, log_level)
+    validator.run(plan, config_file, origin_chain, remote_chains, env_aws, custom_validator_image, log_level)
+    relayer.run(plan, config_file, origin_chain, remote_chains, env_aws, custom_relayer_image, log_level)
 
 def get_aws_user_info(plan, aws_env):
     if len(aws_env) > 0:
