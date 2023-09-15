@@ -2,32 +2,33 @@ validator = import_module("github.com/kurtosis-tech/hyperlane-package/validator.
 relayer = import_module("github.com/kurtosis-tech/hyperlane-package/relayer.star")
 utils = import_module("github.com/kurtosis-tech/hyperlane-package/utils.star")
 
+
 def run(
-    plan,
-    origin_chain_name, # type: string
-    origin_chain_url,  # type: string
-    validator_key,     # type: string
-    remote_chains,
-    agent_config_json,
-    custom_validator_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513", # type: string
-    custom_relayer_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513",   # type: string
-    log_level="info",         # type: string
-    aws_access_key_id="",     # type: string
-    aws_secret_access_key="", # type: string
-    aws_bucket_region="",     # type: string
-    aws_bucket_name="",       # type: string
-    aws_bucket_folder="",     # type: string
+        plan,
+        origin_chain_name,
+        origin_chain_url,
+        validator_key,
+        remote_chains,
+        agent_config_json,
+        custom_validator_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513",
+        custom_relayer_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513",
+        log_level="info",
+        aws_access_key_id="",
+        aws_secret_access_key="",
+        aws_bucket_region="",
+        aws_bucket_name="",
+        aws_bucket_folder="",
 ):
-    """Runs an Hyperlane validator and relayer
+    """Runs a Hyperlane validator and relayer
 
     Args:
         origin_chain_name (string): The name of the origin chain
         origin_chain_url (string): The RPC url of the origin chain
         validator_key (string): The private key to be used by the validator
-        remote_chains: The information about the remote chains
+        remote_chains (dict[string, string]): The information about the remote chains
         agent_config_json: The agent config used by Hyperlane validator and relayer
-        custom_validator_image (string): A custom image to use to run the the validator
-        custom_relayer_image (string): A custom image to use to run the the relayer
+        custom_validator_image (string): A custom image to use to run the validator
+        custom_relayer_image (string): A custom image to use to run the relayer
         log_level (string): Custom logging level. Defaults to "info"
         aws_access_key_id (string): A custom AWS access key ID to use for accessing the AWS bucket
         aws_secret_access_key (string): A custom AWS secret access key to use for accessing the AWS bucket
@@ -41,13 +42,13 @@ def run(
 
     if len(aws_secret_access_key) > 0:
         aws_env["aws_secret_access_key"] = aws_secret_access_key
-    
+
     if len(aws_bucket_region) > 0:
         aws_env["aws_bucket_region"] = aws_bucket_region
-    
+
     if len(aws_bucket_name) > 0:
         aws_env["aws_bucket_name"] = aws_bucket_name
-    
+
     if len(aws_bucket_folder) > 0:
         aws_env["aws_bucket_user_folder"] = aws_bucket_folder
 
@@ -64,9 +65,10 @@ def run(
         log_level = "info"
 
     # ADD DEPLOY STEP HERE
-    config_file = utils.get_agent_config_artifact(plan, agent_config_json) 
+    config_file = utils.get_agent_config_artifact(plan, agent_config_json)
     validator.run(plan, config_file, origin_chain, remote_chains, env_aws, custom_validator_image, log_level)
     relayer.run(plan, config_file, origin_chain, remote_chains, env_aws, custom_relayer_image, log_level)
+
 
 def get_aws_user_info(plan, aws_env):
     if len(aws_env) > 0:
