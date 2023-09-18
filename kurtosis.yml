@@ -23,7 +23,7 @@ description: |
       ],
     },
     ```
-  - `remote_chains`: a JSON object whose keys correpond to the chains specified in the `--remotes` flag during deploy, and whose values are the RPC URLs where those chains can be reached. For example:
+  - `remote_chains`: a map, whose keys correspond to the chains specified in the `--remotes` flag during deploy, and whose values are the RPC URLs where those chains can be reached. For example:
     ```
     {
       "goerli": "https://ethereum-goerli.publicnode.com"
