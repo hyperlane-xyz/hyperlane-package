@@ -1,6 +1,6 @@
-validator = import_module("github.com/kurtosis-tech/hyperlane-package/validator.star")
-relayer = import_module("github.com/kurtosis-tech/hyperlane-package/relayer.star")
-utils = import_module("github.com/kurtosis-tech/hyperlane-package/utils.star")
+validator = import_module("./validator.star")
+relayer = import_module("./relayer.star")
+utils = import_module("./utils.star")
 
 
 def run(

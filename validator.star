@@ -1,4 +1,4 @@
-constants = import_module("github.com/kurtosis-tech/hyperlane-package/constants.star")
+constants = import_module("./constants.star")
 
 DEFAULT_SIGNER_KEY = "HYP_BASE_CHAINS_%s_SIGNER_KEY"
 ORIGIN_CHAIN = "origin_chain"
