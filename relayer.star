@@ -1,4 +1,4 @@
-constants = import_module("github.com/kurtosis-tech/hyperlane-package/constants.star")
+constants = import_module("./constants.star")
 
 def run(plan, config_file, origin_chain, remote_chains, aws_env, relayer_image, log_level):
     env_vars = {}

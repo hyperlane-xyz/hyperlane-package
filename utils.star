@@ -1,7 +1,7 @@
 def get_agent_config_artifact(plan, agent_config_json):
     if len(agent_config_json) == 0:
         return plan.upload_files(
-            src="github.com/kurtosis-tech/hyperlane-package/artifacts/agent_config.json", 
+            src="./artifacts/agent_config.json",
             name="config_file",
         )
     else:
