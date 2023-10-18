@@ -7,7 +7,7 @@ def get_agent_config_artifact(plan, agent_config_json):
     else:
         return plan.render_templates(config={
                 "agent_config.json": struct(
-                    template=str(agent_config_json),
+                    template=json.encode(agent_config_json),
                     data={},
                 ),
             },
