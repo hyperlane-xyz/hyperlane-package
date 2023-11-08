@@ -1,6 +1,6 @@
 constants = import_module("./constants.star")
 
-def run(plan, config_file, origin_chain, remote_chains, aws_env, relayer_image, log_level):
+def run(plan, config_file, origin_chain, rpc_urls, aws_env, relayer_image, log_level):
     env_vars = {}
     relay_chains = []
 
@@ -8,10 +8,10 @@ def run(plan, config_file, origin_chain, remote_chains, aws_env, relayer_image, 
     chain_name = origin_chain["chain_name"]
     signer_id = origin_chain["signer_id"]
 
-    for chain in remote_chains:
+    for chain in rpc_urls:
         relay_chains.append(chain)
         env_var_name = constants.DEFAULT_ORIGIN_CHAIN_URL % chain
-        env_vars[env_var_name] = remote_chains[chain]
+        env_vars[env_var_name] = rpc_urls[chain]
 
     relay_chains.append(chain_name)
     env_vars[constants.DEFAULT_ORIGIN_CHAIN_URL % chain_name] = url 
