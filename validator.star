@@ -3,15 +3,14 @@ constants = import_module("./constants.star")
 DEFAULT_SIGNER_KEY = "HYP_BASE_CHAINS_%s_SIGNER_KEY"
 ORIGIN_CHAIN = "origin_chain"
 
-def run(plan, config_file, origin_chain, remote_chains, aws_env, validator_image, log_level):
+def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log_level):
     env_vars = {}
 
-    url = origin_chain["url"]
     chain = origin_chain["chain_name"]
     signer_id = origin_chain["signer_id"]
     
     env_vars[DEFAULT_SIGNER_KEY % chain] = signer_id
-    env_vars[constants.DEFAULT_ORIGIN_CHAIN_URL % chain] = url
+    env_vars[constants.DEFAULT_ORIGIN_CHAIN_URL % chain] = rpc_urls[chain]
     
     env_vars["HYP_BASE_CHECKPOINTSYNCER_TYPE"] = "s3"
     env_vars["HYP_BASE_CHECKPOINTSYNCER_REGION"] = aws_env.bucket_region 
