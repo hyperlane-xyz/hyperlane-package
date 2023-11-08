@@ -51,7 +51,7 @@ def run(
     if len(aws_bucket_folder) > 0:
         aws_env["aws_bucket_user_folder"] = aws_bucket_folder
 
-    if rpc_urls[origin_chain_name] is None:
+    if rpc_urls[origin_chain_name] == None:
         fail("No RPC URL for " + origin_chain_name)
 
     env_aws = get_aws_user_info(plan, aws_env)
