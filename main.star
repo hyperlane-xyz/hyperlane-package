@@ -25,7 +25,7 @@ def run(
         origin_chain_name (string): The name of the origin chain
         origin_chain_url (string): The RPC url of the origin chain
         validator_key (string): The private key to be used by the validator
-        relay_chains (list[string]): List of chains to relay between
+        relay_chains (string): comma separated list of chains to relay between
         agent_config_json: The agent config used by Hyperlane validator and relayer
         rpc_urls (dict[string, string]): Mapping of chainName => rpcURL
         custom_validator_image (string): A custom image to use to run the validator
@@ -53,6 +53,7 @@ def run(
     if len(aws_bucket_folder) > 0:
         aws_env["aws_bucket_user_folder"] = aws_bucket_folder
 
+    relay_chains = relay_chains.split(",")
     if len(relay_chains) < 2:
         fail("At least two chains must be provided to relay between")
 
