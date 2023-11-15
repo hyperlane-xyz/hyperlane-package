@@ -8,6 +8,7 @@ def run(plan, config_file, relay_chains, relayer_key, rpc_urls, aws_env, relayer
         env_vars[env_var_name] = rpc_urls[chain]
 
     env_vars["HYP_BASE_DEFAULTSIGNER_KEY"] = relayer_key
+    plan.print(relay_chains)
     env_vars["HYP_BASE_RELAYCHAINS"]=",".join(relay_chains)
     env_vars["HYP_BASE_DB"] = constants.DB_FOLDER
     env_vars["CONFIG_FILES"] = "{}{}".format(constants.CONFIG_FILE_FOLDER, constants.CONFIG_FILE_NAME)
