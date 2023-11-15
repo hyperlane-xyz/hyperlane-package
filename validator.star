@@ -4,7 +4,9 @@ DEFAULT_SIGNER_KEY = "HYP_CHAINS_%s_SIGNER_KEY"
 ORIGIN_CHAIN = "origin_chain"
 
 def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log_level):
-    env_vars = {}
+    env_vars = {
+        "HYP_GASPAYMENTENFORCEMENT": '[{"type": "none"}]'
+    }
 
     chain = origin_chain["chain_name"]
     signer_id = origin_chain["signer_id"]
