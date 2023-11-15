@@ -70,7 +70,7 @@ def run(
     # ADD DEPLOY STEP HERE
     config_file = utils.get_agent_config_artifact(plan, agent_config_json)
     validator.run(plan, config_file, origin_chain, rpc_urls, env_aws, custom_validator_image, log_level)
-    relayer.run(plan, config_file, relay_chains, rpc_urls, env_aws, custom_relayer_image, log_level)
+    relayer.run(plan, config_file, relay_chains, validator_key, rpc_urls, env_aws, custom_relayer_image, log_level)
 
 
 def get_aws_user_info(plan, aws_env):
