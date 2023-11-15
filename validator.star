@@ -1,6 +1,6 @@
 constants = import_module("./constants.star")
 
-DEFAULT_SIGNER_KEY = "HYP_BASE_CHAINS_%s_SIGNER_KEY"
+DEFAULT_SIGNER_KEY = "HYP_CHAINS_%s_SIGNER_KEY"
 ORIGIN_CHAIN = "origin_chain"
 
 def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log_level):
