@@ -11,7 +11,7 @@ def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log
     
     env_vars[DEFAULT_SIGNER_KEY % chain] = signer_id
 
-    if rpc_urls[chain]:
+    if chain in rpc_urls:
         env_vars[constants.DEFAULT_ORIGIN_CHAIN_URL % chain] = rpc_urls[chain]
     
     env_vars["HYP_BASE_CHECKPOINTSYNCER_TYPE"] = "s3"
