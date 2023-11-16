@@ -7,10 +7,11 @@ def run(
         plan,
         origin_chain_name,
         validator_key,
-        rpc_urls,
         agent_config_json,
-        custom_validator_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513",
-        custom_relayer_image="gcr.io/abacus-labs-dev/hyperlane-agent:9612623-20230829-154513",
+        relay_chains,
+        rpc_urls={},
+        custom_validator_image="gcr.io/abacus-labs-dev/hyperlane-agent:f14307f-20231110-104539",
+        custom_relayer_image="gcr.io/abacus-labs-dev/hyperlane-agent:f14307f-20231110-104539",
         log_level="info",
         aws_access_key_id="",
         aws_secret_access_key="",
@@ -24,8 +25,9 @@ def run(
         origin_chain_name (string): The name of the origin chain
         origin_chain_url (string): The RPC url of the origin chain
         validator_key (string): The private key to be used by the validator
-        rpc_urls (dict[string, string]): Mapping of chainName => rpcURL
+        relay_chains (string): comma separated list of chains to relay between
         agent_config_json: The agent config used by Hyperlane validator and relayer
+        rpc_urls (dict[string, string]): Mapping of chainName => rpcURL
         custom_validator_image (string): A custom image to use to run the validator
         custom_relayer_image (string): A custom image to use to run the relayer
         log_level (string): Custom logging level. Defaults to "info"
@@ -51,8 +53,9 @@ def run(
     if len(aws_bucket_folder) > 0:
         aws_env["aws_bucket_user_folder"] = aws_bucket_folder
 
-    if rpc_urls[origin_chain_name] == None:
-        fail("No RPC URL for " + origin_chain_name)
+    relay_chains = relay_chains.split(",")
+    if len(relay_chains) < 2:
+        fail("At least two chains must be provided to relay between")
 
     env_aws = get_aws_user_info(plan, aws_env)
 
@@ -68,7 +71,7 @@ def run(
     # ADD DEPLOY STEP HERE
     config_file = utils.get_agent_config_artifact(plan, agent_config_json)
     validator.run(plan, config_file, origin_chain, rpc_urls, env_aws, custom_validator_image, log_level)
-    relayer.run(plan, config_file, origin_chain, rpc_urls, env_aws, custom_relayer_image, log_level)
+    relayer.run(plan, config_file, relay_chains, validator_key, rpc_urls, env_aws, custom_relayer_image, log_level)
 
 
 def get_aws_user_info(plan, aws_env):
