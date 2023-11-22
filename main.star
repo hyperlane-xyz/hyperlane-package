@@ -24,7 +24,7 @@ def run(
     Args:
         origin_chain_name (string): The name of the origin chain
         origin_chain_url (string): The RPC url of the origin chain
-        validator_key (string): The private key to be used by the validator
+        validator_key (string): The private key (0x-prefixed) to be used by the validator
         relay_chains (string): comma separated list of chains to relay between
         agent_config_json: The agent config used by Hyperlane validator and relayer
         rpc_urls (dict[string, string]): Mapping of chainName => rpcURL
