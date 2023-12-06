@@ -53,9 +53,13 @@ def run(
     if len(aws_bucket_folder) > 0:
         aws_env["aws_bucket_user_folder"] = aws_bucket_folder
 
-    relay_chains = relay_chains.split(",")
+    relay_chains = [chain.strip() for chain in relay_chains.split(',')]
     if len(relay_chains) < 2:
         fail("At least two chains must be provided to relay between")
+
+    if len(validator_key) < 64:
+        fail("Invalid validator key provided")
+    validator_key = validator_key if validator_key.startswith("0x") else "0x" + validator_key
 
     env_aws = get_aws_user_info(plan, aws_env)
 
