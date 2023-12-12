@@ -81,7 +81,7 @@ def run(
     # setup prometheus and grafana dashboards for agents
     validator_metrics_job = {
         "Name": "validater metrics", 
-        "Endpoint": "http://{0}:{1}".format(validater.ip_address, validater.ports["metrics"].number),
+        "Endpoint": "http://{0}:{1}".format(validator.ip_address, validator.ports["metrics"].number),
         "Labels": {},
     }
     prometheus_url = prometheus.run(plan, metrics_jobs=[validator_metrics_job])
