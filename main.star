@@ -85,7 +85,7 @@ def run(
         "Labels": {},
     }
     prometheus_url = prometheus.run(plan, metrics_jobs=[validator_metrics_job])
-    grafana.run(plan, prometheus_url, "../static-files/dashboards")
+    grafana.run(plan, prometheus_url, "./static-files/dashboards")
 
 def get_aws_user_info(plan, aws_env):
     if len(aws_env) > 0:
