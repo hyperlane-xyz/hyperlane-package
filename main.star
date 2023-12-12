@@ -75,13 +75,13 @@ def run(
 
     # ADD DEPLOY STEP HERE
     config_file = utils.get_agent_config_artifact(plan, agent_config_json)
-    validator.run(plan, config_file, origin_chain, rpc_urls, env_aws, custom_validator_image, log_level)
-    relayer.run(plan, config_file, relay_chains, validator_key, rpc_urls, env_aws, custom_relayer_image, log_level)
+    validator_service = validator.run(plan, config_file, origin_chain, rpc_urls, env_aws, custom_validator_image, log_level)
+    relayer_servce = relayer.run(plan, config_file, relay_chains, validator_key, rpc_urls, env_aws, custom_relayer_image, log_level)
 
     # setup prometheus and grafana dashboards for agents
     validator_metrics_job = {
         "Name": "validater metrics", 
-        "Endpoint": "http://{0}:{1}".format(validator.ip_address, validator.ports["metrics"].number),
+        "Endpoint": "http://{0}:{1}".format(validator_service.ip_address, validator_service.ports["metrics"].number),
         "Labels": {},
     }
     prometheus_url = prometheus.run(plan, metrics_jobs=[validator_metrics_job])
