@@ -28,4 +28,4 @@ def run(plan, config_file, relay_chains, relayer_key, rpc_urls, aws_env, relayer
         }
     )
 
-    plan.add_service(name="relayer", config=relay_service_config)
+    return plan.add_service(name="relayer", config=relay_service_config)

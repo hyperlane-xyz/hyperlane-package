@@ -48,4 +48,4 @@ def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log
         }
     )
 
-    plan.add_service(name="validator", config=validator_service_config)
+    return plan.add_service(name="validator", config=validator_service_config)
