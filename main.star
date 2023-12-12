@@ -86,7 +86,7 @@ def run(
         "ScrapeInterval": "5s",
     }
     prometheus_url = prometheus.run(plan, metrics_jobs=[validator_metrics_job])
-    grafana.run(plan, prometheus_url, "github.com/tedim52/hyperlane-package/artifacts/dashboards")
+    grafana.run(plan, prometheus_url, "github.com/kurtosis-tech/hyperlane-package/artifacts/dashboards")
 
 def get_aws_user_info(plan, aws_env):
     if len(aws_env) > 0:
