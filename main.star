@@ -83,6 +83,7 @@ def run(
         "Name": "validater metrics", 
         "Endpoint": "{0}:{1}".format(validator_service.ip_address, validator_service.ports["metrics"].number),
         "Labels": {},
+        "ScrapeInterval": "5s",
     }
     prometheus_url = prometheus.run(plan, metrics_jobs=[validator_metrics_job])
     grafana.run(plan, prometheus_url, "github.com/tedim52/hyperlane-package/artifacts/dashboards")
