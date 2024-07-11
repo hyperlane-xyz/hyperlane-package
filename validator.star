@@ -32,6 +32,13 @@ def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log
     validator_service_config = ServiceConfig(
         image=validator_image,
         env_vars=env_vars,
+        ports = {
+            "metrics": PortSpec(
+                number=9090,
+                transport_protocol="TCP",
+                application_protocol="http",
+            )
+        },
         entrypoint=["/bin/sh", "-c", "./validator"],
         files={
             constants.CONFIG_FILE_FOLDER: config_file,
@@ -41,4 +48,4 @@ def run(plan, config_file, origin_chain, rpc_urls, aws_env, validator_image, log
         }
     )
 
-    plan.add_service(name="validator", config=validator_service_config)
+    return plan.add_service(name="validator", config=validator_service_config)
